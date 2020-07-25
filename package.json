@@ -1,12 +1,13 @@
 {
   "scripts": {
     "start": "npm-run-all -p build start-server",
-    "start-server": "nodemon expressApp.js -e js,html,json",
+    "start-server": "nodemon expressApp.js -e ts,tsx,js,html,json",
     "build": "npm-run-all -p compile link",
-    "compile": "babel src -w -d compiled",
-    "link": "watchify -e compiled/index.js -o build/bundle.js -t [ babelify --presets [ @babel/preset-env @babel/preset-react ] ]"
+    "compile": "babel src -w -d build/compiled --extensions .ts,.tsx --presets @babel/preset-typescript",
+    "link": "watchify -e build/compiled/index.js -o build/bundle.js -t [ babelify --presets [ @babel/preset-env @babel/preset-react ] ]"
   },
   "dependencies": {
+    "@types/node": "^14.0.26",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "babelify": "^10.0.0",
     "browserify": "^16.5.1",
     "nodemon": "^2.0.4",
@@ -21,6 +23,7 @@
     "phaser": "^3.24.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
     "typescript": "^3.9.7",
     "watchify": "^3.11.1"
   }

@@ -1,4 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const AppScreen = styled.div
+`
+    width: auto;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+`;
 
 class App extends React.Component
 {
@@ -10,7 +19,7 @@ class App extends React.Component
     render()
     {
         return (
-            <div>Hi !</div>
+            <AppScreen>Hi !</AppScreen>
         );
     }
 }
