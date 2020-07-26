@@ -22,7 +22,7 @@ class GameScene extends Phaser.Scene
 	public preload()
 	{
 		this.graphics = this.add.graphics();
-		this.snake = new Snake(this.graphics);
+		this.snake = new Snake(this, this.graphics);
 		this.grid = new Grid(this.graphics);
 	}
 	

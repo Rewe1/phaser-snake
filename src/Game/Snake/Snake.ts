@@ -3,10 +3,12 @@ import SnakeBody from './SnakeBody';
 class Snake
 {
     private graphics: Phaser.GameObjects.Graphics;
+    private scene: Phaser.Scene;
     private bodyParts: SnakeBody[];
     private direction: number;
-    constructor(graphics: Phaser.GameObjects.Graphics)
+    constructor(scene: Phaser.Scene, graphics: Phaser.GameObjects.Graphics)
     {
+        this.scene = scene;
         this.graphics = graphics;
         this.bodyParts = [];
         this.direction = window.LEFT_DIRECTION;
@@ -24,7 +26,7 @@ class Snake
 
         for(let i = 0; i < 3; i++)
         {
-            this.bodyParts.push(new SnakeBody(this.graphics, Math.floor(window.gridSize_cells/2) + i, Math.floor(window.gridSize_cells/2)));
+            this.bodyParts.push(new SnakeBody(this.scene, Math.floor(window.gridSize_cells/2) + i, Math.floor(window.gridSize_cells/2)));
             this.bodyParts[i].spawn();
         }
     }
@@ -74,7 +76,7 @@ class Snake
     {
         if(!this.move())
             this.die();
-            
+
         if(!this.headChecker())
             this.die();
         

@@ -2,33 +2,26 @@ import Phaser from 'phaser';
 
 class SnakeBody
 {
-    private graphics: Phaser.GameObjects.Graphics;
+    private scene: Phaser.Scene;
     private position: {x: number, y: number};
-    private body: Phaser.GameObjects.Graphics[];
-    constructor(graphics, x, y)
+    private body: Phaser.GameObjects.Rectangle;
+    constructor(scene: Phaser.Scene, x: number, y: number)
     {
-        this.graphics = graphics;
+        this.scene = scene;
         this.position = {x: x, y: y};
-        this.body = [];
     }
 
     spawn()
     {
-        this.body.push(this.graphics.strokeRect(window.leftPadding + this.position.x * window.cellSize,
-                                             window.topPadding + this.position.y * window.cellSize,
-                                             window.cellSize, window.cellSize));
-        this.body.push(this.graphics.fillRect(window.leftPadding + this.position.x * window.cellSize,
-                                              window.topPadding + this.position.y * window.cellSize,
-                                              window.cellSize, window.cellSize));
+        this.body = this.scene.add.rectangle(0, 0, window.cellSize, window.cellSize, 0x303030, 1);
+        this.body.setPosition(this.position.x, this.position.y);
+        this.body.setStrokeStyle(2, 0x808080);
     }
 
     setPosition(position: {x: number, y: number}) :void
     {
-        //console.log('Setting position');
-        this.body.map((value: Phaser.GameObjects.Graphics) =>
-        {
-            value.moveTo(position.x, position.y);
-        });
+        this.body.setPosition(window.leftPadding + (position.x + 0.5) * window.cellSize,
+                              window.topPadding + (position.y + 0.5) * window.cellSize);
         this.position = position;
     }
 
