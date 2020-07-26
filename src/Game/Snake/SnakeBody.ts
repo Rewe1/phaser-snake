@@ -12,7 +12,7 @@ class SnakeBody
 
     spawn()
     {
-        this.graphics.strokeRect(this.position.x * cellSize, this.position.y * cellSize, cellSize, cellSize)
+        this.graphics.strokeRect(window.leftPadding + this.position.x * cellSize, window.topPadding + this.position.y * cellSize, cellSize, cellSize)
     }
 
     move(position: {x: number, y: number}) :void
