@@ -1,6 +1,10 @@
 import * as Phaser from 'phaser';
 import GameScene from './scenes/scene0';
 
+window.gridSize_px = Math.min(innerWidth, innerHeight);
+window.gridSize_cells = 10;
+window.cellSize = gridSize_px/ gridSize_cells;
+
 const gameConfig: Phaser.Types.Core.GameConfig =
 {
 	title: 'Sample',
