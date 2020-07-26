@@ -4,7 +4,7 @@ import Grid from '../Grid/Grid';
 
 let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
 {
-    active: false,
+    active: true,
     visible: false,
     key: 'Game',
 };
@@ -35,6 +35,8 @@ class GameScene extends Phaser.Scene
 
 	public update()
 	{
+		//console.log('updating');
+		this.snake.update();
 	}
 }
 

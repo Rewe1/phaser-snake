@@ -1,10 +1,14 @@
 /* Declare Globals here*/
 
-declare let gridSize_px: number;
-declare let gridSize_cells: number;
-declare let cellSize: number;
-declare let leftPadding: number;
-declare let topPadding: number; 
+declare const gridSize_px: number;
+declare const gridSize_cells: number;
+declare const cellSize: number;
+declare const leftPadding: number;
+declare const topPadding: number; 
+declare const TOP_DIRECTION: number;
+declare const RIGHT_DIRECTION: number;
+declare const BOTTOM_DIRECTION: number;
+declare const LEFT_DIRECTION: number;
 
 interface Window {
     gridSize_px: number;
@@ -12,4 +16,8 @@ interface Window {
     cellSize: number;
     leftPadding: number;
     topPadding: number;
+    TOP_DIRECTION: number;
+    RIGHT_DIRECTION: number;
+    BOTTOM_DIRECTION: number;
+    LEFT_DIRECTION: number;
 }
