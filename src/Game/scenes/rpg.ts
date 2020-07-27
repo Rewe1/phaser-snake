@@ -1,6 +1,6 @@
 /* Random Position Generator */
 
-export function RPG(): {x: number, y: number}
+export function RPG(): iVector2D
 {
     let position =
     {

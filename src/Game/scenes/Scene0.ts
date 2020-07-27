@@ -19,14 +19,16 @@ class GameScene extends Phaser.Scene
 	grid: Grid;
 	graphics: Phaser.GameObjects.Graphics;
 	timer: Phaser.Time.TimerEvent;
-	keys: object;
+	shouldPause: boolean;
 	keyW: Phaser.Input.Keyboard.Key;
 	keyA: Phaser.Input.Keyboard.Key;
 	keyS: Phaser.Input.Keyboard.Key;
 	keyD: Phaser.Input.Keyboard.Key;
 	constructor()
 	{
-        super(sceneConfig);
+		super(sceneConfig);
+
+		this.shouldPause = false;
 	}
 	
 	public preload()
@@ -41,21 +43,27 @@ class GameScene extends Phaser.Scene
 	{
 		this.grid.create();
 		this.snake.spawn();
-		this.berry.spawn();
+		this.berry.spawn(this.snake.getBodyPositions());
 		this.cameras.main.setBackgroundColor('#dedede');
-		this.timer = this.time.addEvent({delay: window.moveDelay, loop: true, callback: () => this.snake.update()});
+		this.timer = this.time.addEvent({delay: window.moveDelay, loop: true, callback: () => this.gameUpdate()});
+	}
+
+	gameUpdate()
+	{
+		if(this.shouldPause)
+			return;
+
+		this.snake.update();
+		if(iVector2D_m.isEqualTo(this.snake.getPosition(), this.berry.getPosition()))
+		{
+			this.snake.eat(this.berry);
+		}
+		this.berry.update(this.snake.getBodyPositions());
+
 	}
 	
 	public update()
 	{
-		this.keys = this.input.keyboard.addKeys(
-			{ 
-				'up': Phaser.Input.Keyboard.KeyCodes.W,
-				'right': Phaser.Input.Keyboard.KeyCodes.D,
-				'left': Phaser.Input.Keyboard.KeyCodes.A,
-				'down': Phaser.Input.Keyboard.KeyCodes.S,
-			});
-
 		this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 		this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 		this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -69,11 +77,6 @@ class GameScene extends Phaser.Scene
 			this.snake.setDirection(Direction.down);
 		if(this.keyD.isDown)
 			this.snake.setDirection(Direction.right);
-
-		if(iVector2D_m.isEqualTo(this.snake.getPosition(), this.berry.getPosition()))
-		{
-			this.snake.eat(this.berry);
-		}
 	}
 }
 

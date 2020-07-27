@@ -78,9 +78,21 @@ class Snake
         return true;
     }
 
-    getPosition(): {x: number, y: number}
+    getPosition(): iVector2D
     {
         return this.bodyParts[0].getPosition();
+    }
+
+    getBodyPositions(): iVector2D[]
+    {
+        let positions: iVector2D[] = [];
+
+        for(let i = 0; i < this.bodyParts.length; i++)
+        {
+            positions.push(this.bodyParts[i].getPosition());
+        }
+
+        return positions;
     }
 
     private headChecker() : boolean
@@ -89,7 +101,6 @@ class Snake
         let headPosition: iVector2D = this.bodyParts[0].getPosition();
         for(let i = 0; i < this.bodyParts.length; i++)
         {
-            console.log(i, this.bodyParts[i].getPosition());
 
             if(i === 0)
                 continue;
@@ -118,14 +129,9 @@ class Snake
     {
         if(!this.isAlive)
             return;
-        
-        let moved: boolean = false
-        if(!moved)
-        {
-            moved = true;
-            if(!this.move())
-                this.die();
-        }
+
+        if(!this.move())
+            this.die();
 
         if(!this.headChecker())
         {

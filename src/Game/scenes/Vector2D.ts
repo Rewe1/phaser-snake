@@ -8,7 +8,7 @@ export function isEqualTo(vector0: iVector2D, vector1: iVector2D): boolean
         return false;
 }
 
-export function copy(vector: iVector2D)
+export function copy(vector: iVector2D): iVector2D
 {
     return {
         x: vector.x,
