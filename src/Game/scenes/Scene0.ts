@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Snake from './classes/Snake/Snake';
+import Berry from './classes/Berry';
 import Grid from './classes/Grid/Grid';
 import Direction from './enumDirection';
 import { Dir } from 'fs';
@@ -14,6 +15,7 @@ let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
 class GameScene extends Phaser.Scene
 {
 	snake: Snake;
+	berry: Berry;
 	grid: Grid;
 	graphics: Phaser.GameObjects.Graphics;
 	timer: Phaser.Time.TimerEvent;
@@ -30,16 +32,18 @@ class GameScene extends Phaser.Scene
 	public preload()
 	{
 		this.graphics = this.add.graphics();
-		this.snake = new Snake(this, this.graphics);
+		this.snake = new Snake(this);
+		this.berry = new Berry(this);
 		this.grid = new Grid(this.graphics);
 	}
 	
 	public create()
 	{
 		this.grid.create();
-        this.snake.spawn();
+		this.snake.spawn();
+		this.berry.spawn();
 		this.cameras.main.setBackgroundColor('#dedede');
-		this.timer = this.time.addEvent({delay: 1000, loop: true, callback: () => this.snake.update()});
+		this.timer = this.time.addEvent({delay: window.moveDelay, loop: true, callback: () => this.snake.update()});
 	}
 	
 	public update()
@@ -65,6 +69,12 @@ class GameScene extends Phaser.Scene
 			this.snake.setDirection(Direction.down);
 		if(this.keyD.isDown)
 			this.snake.setDirection(Direction.right);
+
+		if(this.snake.getPosition().x === this.berry.getPosition().x && 
+		   this.snake.getPosition().y === this.berry.getPosition().y )
+		{
+			this.snake.eat(this.berry);
+		}
 	}
 }
 

@@ -1,5 +1,6 @@
 import SnakeBody from './SnakeBody';
 import Direction from '../../enumDirection';
+import Berry from '../Berry';
 
 class Snake
 {
@@ -9,12 +10,13 @@ class Snake
     private direction: Direction;
     private lastMove: Direction;
     private isAlive: boolean;
-    constructor(scene: Phaser.Scene, graphics: Phaser.GameObjects.Graphics)
+    private shouldGrow: boolean;
+    constructor(scene: Phaser.Scene)
     {
         this.scene = scene;
-        this.graphics = graphics;
         this.bodyParts = [];
         this.direction = Direction.left;
+        this.shouldGrow = false;
         this.isAlive = true;
     }
 
@@ -31,12 +33,9 @@ class Snake
 
     spawn() : void
     {
-        this.graphics.lineStyle(2, 0x808080);
-        this.graphics.fillStyle(0x303030);
-
         for(let i = 0; i < 3; i++)
         {
-            this.bodyParts.push(new SnakeBody(this.scene, Math.floor(window.gridSize_cells/2) + i, Math.floor(window.gridSize_cells/2)));
+            this.bodyParts.push(new SnakeBody(this.scene, {x: Math.floor(window.gridSize_cells/2) + i, y: Math.floor(window.gridSize_cells/2)}));
             this.bodyParts[i].spawn();
         }
     }
@@ -50,7 +49,7 @@ class Snake
             else if(this.direction === Direction.left)
                 currentPosition.x -= 1;
                 else if(this.direction === Direction.down)
-                currentPosition.y += 1;
+                    currentPosition.y += 1;
                     else if(this.direction === Direction.right)
                         currentPosition.x += 1;
 
@@ -58,11 +57,27 @@ class Snake
            (currentPosition.y < 0 || currentPosition.y > window.gridSize_cells -1))
             return false;
 
-        this.bodyParts[this.bodyParts.length -1].setPosition(currentPosition);
-        this.lastMove = this.direction;
-        this.bodyParts.unshift(this.bodyParts.pop());
+        if(this.shouldGrow)
+        {
+            console.log('Moving')
+            this.bodyParts.unshift(new SnakeBody(this.scene, currentPosition));
+            this.bodyParts[0].spawn();
+            this.shouldGrow = false;
+            console.log(this.bodyParts);
+        }
+        else
+        {
+            this.bodyParts[this.bodyParts.length -1].setPosition(currentPosition);
+            this.lastMove = this.direction;
+            this.bodyParts.unshift(this.bodyParts.pop());
+        }
 
         return true;
+    }
+
+    getPosition(): {x: number, y: number}
+    {
+        return this.bodyParts[0].getPosition();
     }
 
     private headChecker() : boolean
@@ -82,6 +97,13 @@ class Snake
     private die()
     {
         this.isAlive = false;
+    }
+
+    eat(berry: Berry)
+    {
+        console.log('Ate');
+        berry.beEaten();
+        this.shouldGrow = true;
     }
 
     update() : void

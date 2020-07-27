@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import * as Renderer from '../../Renderer';
 
 class SnakeBody
 {
@@ -6,28 +7,21 @@ class SnakeBody
     private body: Phaser.GameObjects.Rectangle;
     private position: {x: number, y: number};
 
-    constructor(scene: Phaser.Scene, x: number, y: number)
+    constructor(scene: Phaser.Scene, position: {x: number, y: number})
     {
         this.scene = scene;
-        this.position =
-        {
-            x: x,
-            y: y
-        };
+        this.position = position;
     }
 
     spawn()
     {
-        this.body = this.scene.add.rectangle(0, 0, window.cellSize, window.cellSize, 0x303030, 1);
-        this.setPosition(this.position);
-        this.body.setStrokeStyle(2, 0x808080);
+        this.body = Renderer.createSquare(this.scene, this.position, 0x303030, 2, 0x808080);
     }
 
     setPosition(position: {x: number, y: number}) : boolean
     {
         this.position = position;
-        this.body.setPosition(window.leftPadding + (this.position.x + 0.5) * window.cellSize,
-                              window.topPadding + (this.position.y + 0.5) * window.cellSize);
+        Renderer.moveSquare(this.body, this.position);
         return true;
     }
 

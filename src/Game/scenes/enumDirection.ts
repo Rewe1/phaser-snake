@@ -1,3 +1,5 @@
+/* I don't know how to declare this globally */
+
 enum Direction
 {
     up,

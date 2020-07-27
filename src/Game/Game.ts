@@ -6,6 +6,7 @@ window.gridSize_cells = 21;
 window.cellSize = gridSize_px/ gridSize_cells;
 window.leftPadding = (window.innerWidth - window.gridSize_px)/2;
 window.topPadding = (window.innerHeight - window.gridSize_px)/2;
+window.moveDelay = 500;
 
 const gameConfig: Phaser.Types.Core.GameConfig =
 {

@@ -5,6 +5,7 @@ declare const gridSize_cells: number;
 declare const cellSize: number;
 declare const leftPadding: number;
 declare const topPadding: number;
+declare const moveDelay: number;
 
 interface Window {
     gridSize_px: number;
@@ -12,4 +13,5 @@ interface Window {
     cellSize: number;
     leftPadding: number;
     topPadding: number;
+    moveDelay: number;
 }
