@@ -1,39 +1,33 @@
 import Phaser from 'phaser';
 import * as Renderer from '../../Renderer';
-import Vector2D from '../../Vector2D';
+import * as iVector2D_m from '../../Vector2D';
 
 class SnakeBody
 {
     private scene: Phaser.Scene;
     private body: Phaser.GameObjects.Rectangle;
-    private position: Vector2D;
+    private position: iVector2D;
 
     constructor(scene: Phaser.Scene, position: iVector2D)
     {
         this.scene = scene;
-        this.position = new Vector2D(position);
+        this.position = position;
     }
 
     spawn()
     {
-        this.body = Renderer.createSquare(this.scene, this.position.get(), 0x303030, 2, 0x808080);
+        this.body = Renderer.createSquare(this.scene, this.position, 0x303030, 2, 0x808080);
     }
 
-    setPosition(position: iVector2D) : boolean
+    setPosition(position: iVector2D)
     {
-        this.position.set(position);
-        Renderer.moveSquare(this.body, this.position.get());
-        return true;
-    }
-
-    getVector(): Vector2D
-    {
-        return this.position;
+        this.position = position;
+        Renderer.moveSquare(this.body, this.position);
     }
 
     getPosition(): iVector2D
     {
-        return this.position.get();
+        return iVector2D_m.copy(this.position);
     }
 }
 

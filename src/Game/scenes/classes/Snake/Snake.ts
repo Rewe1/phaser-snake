@@ -1,6 +1,7 @@
 import SnakeBody from './SnakeBody';
 import Direction from '../../enumDirection';
 import Berry from '../Berry';
+import * as iVector2D_m from '../../Vector2D';
 
 class Snake
 {
@@ -63,11 +64,9 @@ class Snake
 
         if(this.shouldGrow)
         {
-            console.log('Moving')
             this.bodyParts.unshift(new SnakeBody(this.scene, currentPosition));
             this.bodyParts[0].spawn();
             this.shouldGrow = false;
-            console.log(this.bodyParts);
         }
         else
         {
@@ -86,16 +85,22 @@ class Snake
 
     private headChecker() : boolean
     {
-        this.bodyParts.map((part, i) =>
+        let snakeBitItself: boolean = false;
+        let headPosition: iVector2D = this.bodyParts[0].getPosition();
+        for(let i = 0; i < this.bodyParts.length; i++)
         {
-            let headPosition = this.bodyParts[0].getPosition();
-            if(i !== 0)
-            {
-                if(headPosition === this.bodyParts[i].getPosition())
-                    return false;
-            }
-        })
-        return true;
+            console.log(i, this.bodyParts[i].getPosition());
+
+            if(i === 0)
+                continue;
+
+            if(iVector2D_m.isEqualTo(headPosition, this.bodyParts[i].getPosition()))
+                snakeBitItself = true;
+        }
+        if(snakeBitItself)
+            return false;
+        else
+            return true;
     }
 
     private die()
@@ -105,7 +110,6 @@ class Snake
 
     eat(berry: Berry)
     {
-        console.log('Ate');
         berry.beEaten();
         this.shouldGrow = true;
     }
@@ -114,12 +118,19 @@ class Snake
     {
         if(!this.isAlive)
             return;
-
-        if(!this.move())
-            this.die();
+        
+        let moved: boolean = false
+        if(!moved)
+        {
+            moved = true;
+            if(!this.move())
+                this.die();
+        }
 
         if(!this.headChecker())
+        {
             this.die();
+        }
         
     }
 }

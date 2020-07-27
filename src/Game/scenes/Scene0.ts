@@ -3,7 +3,7 @@ import Snake from './classes/Snake/Snake';
 import Berry from './classes/Berry';
 import Grid from './classes/Grid/Grid';
 import Direction from './enumDirection';
-import { Dir } from 'fs';
+import * as iVector2D_m from './Vector2D';
 
 let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
 {
@@ -70,7 +70,7 @@ class GameScene extends Phaser.Scene
 		if(this.keyD.isDown)
 			this.snake.setDirection(Direction.right);
 
-		if(this.berry.getVector().isEqualTo(this.snake.getPosition()))
+		if(iVector2D_m.isEqualTo(this.snake.getPosition(), this.berry.getPosition()))
 		{
 			this.snake.eat(this.berry);
 		}

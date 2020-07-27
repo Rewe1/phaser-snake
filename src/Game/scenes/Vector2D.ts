@@ -1,28 +1,17 @@
-class Vector2D
+/* iVector2D methods */
+
+export function isEqualTo(vector0: iVector2D, vector1: iVector2D): boolean
 {
-    position: iVector2D;
-    constructor(position: iVector2D)
-    {
-        this.position = position;
-    }
-
-    isEqualTo(position: iVector2D): boolean
-    {
-        if(this.position.x === position.x && this.position.y === position.y)
-            return true;
-        else
-            return false;
-    }
-
-    get(): iVector2D
-    {
-        return this.position;
-    }
-
-    set(position: iVector2D)
-    {
-        this.position = position;
-    }
+    if(vector0.x === vector1.x && vector0.y === vector1.y)
+        return true;
+    else
+        return false;
 }
 
-export default Vector2D;
+export function copy(vector: iVector2D)
+{
+    return {
+        x: vector.x,
+        y: vector.y
+    };
+}
