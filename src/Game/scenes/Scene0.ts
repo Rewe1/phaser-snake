@@ -70,8 +70,7 @@ class GameScene extends Phaser.Scene
 		if(this.keyD.isDown)
 			this.snake.setDirection(Direction.right);
 
-		if(this.snake.getPosition().x === this.berry.getPosition().x && 
-		   this.snake.getPosition().y === this.berry.getPosition().y )
+		if(this.berry.getVector().isEqualTo(this.snake.getPosition()))
 		{
 			this.snake.eat(this.berry);
 		}

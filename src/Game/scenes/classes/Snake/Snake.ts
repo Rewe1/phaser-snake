@@ -4,7 +4,6 @@ import Berry from '../Berry';
 
 class Snake
 {
-    private graphics: Phaser.GameObjects.Graphics;
     private scene: Phaser.Scene;
     private bodyParts: SnakeBody[];
     private direction: Direction;
@@ -35,7 +34,12 @@ class Snake
     {
         for(let i = 0; i < 3; i++)
         {
-            this.bodyParts.push(new SnakeBody(this.scene, {x: Math.floor(window.gridSize_cells/2) + i, y: Math.floor(window.gridSize_cells/2)}));
+            let position: iVector2D = 
+            {
+                x: Math.floor(window.gridSize_cells/2) + i, 
+                y: Math.floor(window.gridSize_cells/2)
+            }
+            this.bodyParts.push(new SnakeBody(this.scene, position));
             this.bodyParts[i].spawn();
         }
     }

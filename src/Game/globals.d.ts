@@ -6,6 +6,11 @@ declare const cellSize: number;
 declare const leftPadding: number;
 declare const topPadding: number;
 declare const moveDelay: number;
+declare interface iVector2D
+{
+    x: number;
+    y: number;
+}
 
 interface Window {
     gridSize_px: number;
