@@ -6,6 +6,7 @@ declare const cellSize: number;
 declare const leftPadding: number;
 declare const topPadding: number;
 declare const moveDelay: number;
+declare let isPortrait: boolean;
 declare interface iVector2D
 {
     x: number;
@@ -19,4 +20,5 @@ interface Window {
     leftPadding: number;
     topPadding: number;
     moveDelay: number;
+    isPortrait: boolean;
 }
