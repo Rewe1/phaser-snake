@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import Snake from './Snake/Snake';
-import Grid from './Grid/Grid';
+import Snake from './classes/Snake/Snake';
+import Grid from './classes/Grid/Grid';
 import Direction from './enumDirection';
 import { Dir } from 'fs';
 
@@ -65,8 +65,6 @@ class GameScene extends Phaser.Scene
 			this.snake.setDirection(Direction.down);
 		if(this.keyD.isDown)
 			this.snake.setDirection(Direction.right);
-		
-			console.log(Direction.up, Direction.left, Direction.down, Direction.right);
 	}
 }
 
