@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
-import Snake from '../Snake/Snake';
-import Grid from '../Grid/Grid';
+import Snake from './Snake/Snake';
+import Grid from './Grid/Grid';
+import Direction from './enumDirection';
+import { Dir } from 'fs';
 
 let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
 {
@@ -14,6 +16,12 @@ class GameScene extends Phaser.Scene
 	snake: Snake;
 	grid: Grid;
 	graphics: Phaser.GameObjects.Graphics;
+	timer: Phaser.Time.TimerEvent;
+	keys: object;
+	keyW: Phaser.Input.Keyboard.Key;
+	keyA: Phaser.Input.Keyboard.Key;
+	keyS: Phaser.Input.Keyboard.Key;
+	keyD: Phaser.Input.Keyboard.Key;
 	constructor()
 	{
         super(sceneConfig);
@@ -30,13 +38,35 @@ class GameScene extends Phaser.Scene
 	{
 		this.grid.create();
         this.snake.spawn();
-        this.cameras.main.setBackgroundColor('#dedede');
+		this.cameras.main.setBackgroundColor('#dedede');
+		this.timer = this.time.addEvent({delay: 1000, loop: true, callback: () => this.snake.update()});
 	}
-
+	
 	public update()
 	{
-		//console.log('updating');
-		this.snake.update();
+		this.keys = this.input.keyboard.addKeys(
+			{ 
+				'up': Phaser.Input.Keyboard.KeyCodes.W,
+				'right': Phaser.Input.Keyboard.KeyCodes.D,
+				'left': Phaser.Input.Keyboard.KeyCodes.A,
+				'down': Phaser.Input.Keyboard.KeyCodes.S,
+			});
+
+		this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+		this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+		this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+		this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+		if(this.keyW.isDown)
+			this.snake.setDirection(Direction.up);
+		if(this.keyA.isDown)
+			this.snake.setDirection(Direction.left);
+		if(this.keyS.isDown)
+			this.snake.setDirection(Direction.down);
+		if(this.keyD.isDown)
+			this.snake.setDirection(Direction.right);
+		
+			console.log(Direction.up, Direction.left, Direction.down, Direction.right);
 	}
 }
 
