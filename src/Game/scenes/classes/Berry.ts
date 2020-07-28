@@ -1,4 +1,3 @@
-import {RPG} from '../rpg';
 import * as Renderer from '../Renderer';
 import * as iVector2D_m from '../Vector2D';
 
@@ -34,13 +33,13 @@ class Berry
 
     getValidPosition(snakeBodyPositions: iVector2D[]): iVector2D
     {
-        let pos = RPG();
+        let pos = iVector2D_m.RVG();
 
         for(let i = 0; i < snakeBodyPositions.length; i++)
         {
             if(iVector2D_m.isEqualTo(pos, snakeBodyPositions[i]))
             {
-                pos = RPG();
+                pos = iVector2D_m.RVG();
                 i = -1;
             }
         }

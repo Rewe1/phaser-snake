@@ -15,3 +15,16 @@ export function copy(vector: iVector2D): iVector2D
         y: vector.y
     };
 }
+
+/* Random Vector Generator */
+
+export function RVG(): iVector2D
+{
+    let position =
+    {
+        x: Math.floor((Math.random()) * window.gridSize_cells),
+        y: Math.floor((Math.random()) * window.gridSize_cells)
+    }
+
+    return position;
+}

@@ -9,8 +9,8 @@ class UI
 
         this.scoreText = this.createText(
             {
-                x: !window.isPortrait ? window.leftPadding + window.gridSize_px +16 : window.leftPadding,
-                y:  window.isPortrait ? window.topPadding + window.gridSize_px +16 : window.topPadding,
+                x: window.isPortrait ? window.leftPadding : window.leftPadding + window.gridSize_px +16,
+                y: window.isPortrait ? window.topPadding - 21 - 16 : window.topPadding,
             });
     }
 
