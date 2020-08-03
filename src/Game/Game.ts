@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
-import GameScene from './scenes/scene0';
+import GameScene from './scenes/gameScene/GameScene';
+import StartScene from './scenes/start/StartScene';
 
 window.gridSize_px = (Math.min(innerWidth, innerHeight)) -32;
 window.gridSize_cells = 21;
@@ -30,24 +31,32 @@ const gameConfig: Phaser.Types.Core.GameConfig =
 		},
 	},
 
-	scene: GameScene,
+	scene: [StartScene, GameScene],
 
 	backgroundColor: '#000000',
 };
 
-const game = new Phaser.Game(gameConfig);
-
-function preload ()
+class SnakeGame extends Phaser.Game
 {
-	this.add.image();
+	constructor()
+	{
+		super(gameConfig);
+	}
+	
+	preload()
+	{
+	}
+
+	create()
+	{
+	}
+
+	update()
+	{
+	}
 }
 
-function create ()
-{
-}
+const game = new SnakeGame();
 
-function update ()
-{
-}
 
 export default game;
