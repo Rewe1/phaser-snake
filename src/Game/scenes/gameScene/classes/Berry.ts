@@ -1,5 +1,5 @@
-import * as Renderer from '../Renderer';
-import * as iVector2D_m from '../Vector2D';
+import * as Renderer from '../../Renderer';
+import * as iVector2D_m from '../../Vector2D';
 
 class Berry
 {

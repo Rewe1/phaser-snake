@@ -1,7 +1,7 @@
 import SnakeBody from './SnakeBody';
 import Direction from '../../enumDirection';
 import Berry from '../Berry';
-import * as iVector2D_m from '../../Vector2D';
+import * as iVector2D_m from '../../../Vector2D';
 
 class Snake
 {
@@ -117,6 +117,7 @@ class Snake
     private die()
     {
         this.isAlive = false;
+        this.scene.time.addEvent({delay: 1500, loop: false, callback: () => this.scene.scene.start('Start')});
     }
 
     eat(berry: Berry)
