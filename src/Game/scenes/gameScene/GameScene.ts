@@ -6,13 +6,6 @@ import Direction from './enumDirection';
 import * as iVector2D_m from './Vector2D';
 import UI from './classes/UI';
 
-let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
-{
-    active: true,
-    visible: false,
-    key: 'Game',
-};
-
 class GameScene extends Phaser.Scene
 {
 	snake: Snake;
@@ -33,7 +26,7 @@ class GameScene extends Phaser.Scene
 	userInterface: UI;
 	constructor()
 	{
-		super(sceneConfig);
+		super('Game');
 
 		this.shouldPause = false;
 		this.score = 0;

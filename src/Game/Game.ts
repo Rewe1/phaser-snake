@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
-import GameScene from './scenes/gameScene/GameScene';
 import StartScene from './scenes/start/StartScene';
+import GameScene from './scenes/gameScene/GameScene';
 
 window.gridSize_px = (Math.min(innerWidth, innerHeight)) -32;
 window.gridSize_cells = 21;
@@ -9,6 +9,7 @@ window.leftPadding = (window.innerWidth - window.gridSize_px)/2;
 window.topPadding = (window.innerHeight - window.gridSize_px)/2;
 window.moveDelay = 200;
 window.isPortrait = window.innerHeight > window.innerWidth ? true : false;
+window.shouldStart = false;
 
 const gameConfig: Phaser.Types.Core.GameConfig =
 {
@@ -57,6 +58,4 @@ class SnakeGame extends Phaser.Game
 }
 
 const game = new SnakeGame();
-
-
 export default game;

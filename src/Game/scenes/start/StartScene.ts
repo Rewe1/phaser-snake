@@ -1,25 +1,19 @@
-let sceneConfig: Phaser.Types.Scenes.SettingsConfig =
-{
-    active: true,
-    visible: false,
-    key: 'Start',
-};
-
 class StartScene extends Phaser.Scene
 {
     constructor()
     {
-        super(sceneConfig);
+        super('Start');
     }
 
     create()
     {
-
+        this.add.text(16, 16, 'Start Scene started...');
     }
 
-    render()
+    update()
     {
-
+        if(window.shouldStart)
+            this.scene.start('Game');
     }
 }
 

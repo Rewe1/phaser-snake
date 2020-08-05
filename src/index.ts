@@ -1,3 +1,3 @@
 import game from './Game/Game';
 
-game;
+game.create();

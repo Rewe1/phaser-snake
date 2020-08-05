@@ -7,6 +7,7 @@ declare const leftPadding: number;
 declare const topPadding: number;
 declare const moveDelay: number;
 declare let isPortrait: boolean;
+declare let shouldStart: boolean;
 declare interface iVector2D
 {
     x: number;
@@ -21,4 +22,5 @@ interface Window {
     topPadding: number;
     moveDelay: number;
     isPortrait: boolean;
+    shouldStart: boolean;
 }
