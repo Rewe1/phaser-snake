@@ -1,4 +1,4 @@
-import * as iVector2D_m from '../Vector2D';
+import * as iVector2D_m from '../../utilities/Vector2D';
 
 class StartScene extends Phaser.Scene
 {

@@ -3,7 +3,7 @@ import Snake from './classes/Snake/Snake';
 import Berry from './classes/Berry';
 import Grid from './classes/Grid/Grid';
 import Direction from './enumDirection';
-import * as iVector2D_m from '../Vector2D';
+import * as iVector2D_m from '../../utilities/Vector2D';
 import UI from './classes/UI';
 
 class GameScene extends Phaser.Scene

@@ -1,7 +1,7 @@
 import SnakeBody from './SnakeBody';
 import Direction from '../../enumDirection';
 import Berry from '../Berry';
-import * as iVector2D_m from '../../../Vector2D';
+import * as iVector2D_m from '../../../../utilities/Vector2D';
 
 class Snake
 {

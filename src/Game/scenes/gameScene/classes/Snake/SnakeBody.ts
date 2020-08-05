@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import * as Renderer from '../../../Renderer';
-import * as iVector2D_m from '../../../Vector2D';
+import * as Renderer from '../../../../utilities/Renderer';
+import * as iVector2D_m from '../../../../utilities/Vector2D';
 
 class SnakeBody
 {
